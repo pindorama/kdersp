@@ -1,0 +1,13 @@
+<?php echo $this->render('_header.phtml') ?>
+
+<div id="menu" style="background-color:#FFD700;height:520px ;width:140px;float:left;"><br>
+    <br>
+<b>Menu</b><br>
+<?php echo $this->navigation(); ?>
+</div>
+
+<div class="content">
+    <?php echo $this->layout()->content; ?>
+</div>
+
+<?php echo $this->render('_footer.phtml') ?>
