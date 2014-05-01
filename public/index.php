@@ -1,3 +1,4 @@
+
 <?php
 
 // Define path to application directory
@@ -14,8 +15,16 @@ set_include_path(implode(PATH_SEPARATOR, array(
     get_include_path(),
 )));
 
+
+
+
 /** Zend_Application */
 require_once 'Zend/Application.php';
+//require_once 'Plugin/DisplayVariable';
+//Zend_Loader::registerAutoload();
+//$frontController = Zend_Controller_Front::getInstance();
+//$frontController->registerPlugin(new Plugin_DisplayVariable());
+
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(

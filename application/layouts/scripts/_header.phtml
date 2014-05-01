@@ -1,10 +1,15 @@
 <?php echo $this->doctype() ?>
+<?php //echo $this->placeholder('header'); ?>
+
 <html>
     <head>
-        <?php echo $this->headTitle('Controle de Academia') ?>
+        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <!-- Favicon -->
+    
+        <link rel="shortcut icon" href="/img/favicon.ico">
         <?php echo $this->headMeta() ?>
+        <?php echo $this->headTitle() ?>
 
         <?php $this->headScript()->appendFile($this->baseUrl().'/js/jquery.js') ?>
         <?php $this->headScript()->appendFile($this->baseUrl().'/js/bootstrap.js') ?>
@@ -57,7 +62,9 @@
                             <a class="brand">Controle de Academia</a>
                             <div class="nav-collapse collapse">
                                 <ul class="nav">
-                                    <li><a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), null, true) ?>"><i class="icon-home"></i> Início</a></li>
+                                    <!-- viewHelper url  one of the best veiew helpers-->
+                                    <li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), null, true) ?>"><i class="icon-home"></i> Início</a></li>
+                                    <li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'logout'), null, true) ?>"><i class="icon-logout"></i> Logout</a></li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-pencil"></i> Cadastro <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
@@ -72,6 +79,8 @@
                                             <li><a href="<?php echo $this->url(array('controller' => 'customer', 'action' => 'index'), null, true) ?>">Controle de Alunos</a></li>
                                             <li><a href="<?php echo $this->url(array('controller' => 'employees', 'action' => 'index'), null, true) ?>">Controle de Funcionários</a></li>
                                             <li><a href="#">Controle de Acesso</a></li>
+                                             <li><a href="#"></a></li>
+                                            
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -86,27 +95,9 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Entrar <b class="caret"></b></a>
                                         <form class="login-menu dropdown-menu well">
-                                            <fieldset>
-                                                <div class="control-group">
-                                                    <label class="control-label">Usuário</label>
-                                                    <div class="controls">
-                                                        <input type="text" placeholder="Nome de usuário">
-                                                    </div>
-                                                </div>
-
-                                                <div class="control-group">
-                                                    <label class="control-label">Senha</label>
-                                                    <div class="controls">
-                                                        <input type="password" placeholder="Senha">
-                                                    </div>
-                                                </div>
-
-                                                <div class="control-group">
-                                                    <div class="controls">
-                                                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
+                                            <?php// echo $this->partial('partials/login.phtml', array('users' => $this->header)); ?>
+                                            <?php echo $this->form; ?>
+                                         
                                         </form>
                                     </li>
                                 </ul>

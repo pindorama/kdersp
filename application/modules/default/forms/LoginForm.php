@@ -13,6 +13,7 @@ class Form_LoginForm extends Zend_Form {
         
         $password = new Zend_Form_Element_Password('password');
         $password->setLabel('Password:')
+                //VALIDATOR SHOW THE ERROR ON THE PAGE
                  ->setRequired(true);
         
         $login = new Zend_Form_Element_Submit('login');
@@ -21,7 +22,10 @@ class Form_LoginForm extends Zend_Form {
         //add elements
         $this->addElements(array($username, $password, $login));
         $this->setMethod('post');
-        $this->setAction(Zend_Controller_Front::getInstance()->getBaseUrl().'/authentication/login');
+        //pay attention hier the path Zend_Controller_Front::getInstance()->getBaseUrl() = the home path
+        //submit "action" send to authentication/login
+       $this->setAction(Zend_Controller_Front::getInstance()->getBaseUrl().'/authentication/login');
+         //$this->setAction(Zend_Controller_Front::getInstance()->getBaseUrl());
     }
     
     

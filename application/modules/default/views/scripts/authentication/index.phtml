@@ -1,5 +1,32 @@
 <br /><br />
 <div id="view-content">
 	<p>View script for controller <b>Authentication</b> and script/action name <b>index</b></p>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>JavaScript Aula02</title>
+		
+	</head>
+	<body>
+                <?php
+                        if(isset($_GET['file']))
+                        {
+                            echo $_GET['file'] . "<br/>" . PHP_EOL;
+                            
+                        }
+                        
+                        echo "SCRIPT_FILENAME: " . $_SERVER['SCRIPT_FILENAME'] . "<br/>" . PHP_EOL;
+                        
+                        if(isset($_SERVER['REDIRECT_URL']))
+                        {
+                            echo "REDIRECT_URL: " . $_SERVER['REDIRECT_URL'] . "<br/>" . PHP_EOL;
+                        }
+                
+                
+                ?>
+
+	</body>
+</html>
         
 </div>
