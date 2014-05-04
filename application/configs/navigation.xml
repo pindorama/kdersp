@@ -22,8 +22,8 @@
         <books>
             <label>Books</label>
             <uri>#</uri>
-             <privelege>index</privelege>
             <resource>library:books</resource>
+             <privilege>index</privilege>
             <pages>
                 <list>
                     <label>List</label>

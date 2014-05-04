@@ -1,0 +1,29 @@
+<?= $this->ajaxLink('Beginning',
+                    $this->url(array('page' => $this->first)),
+                    array('id' => 'beginning',
+                           'complete' => 'displayBooks(data)',
+                            'method' => 'post'),
+                    array('format' => 'json')); ?>
+
+
+<a href="#" id="previous" page="<?= $this->previous?>">&lt; Previous</a>
+
+<?php 
+    foreach ($this->pagesInRange as $page) {
+        echo '<a href="#" id="page" page="'.$page.'">' .$page.'</a> | ';
+    }
+   
+?>
+
+<a href="#" id="next" page="<?= $this->next; ?>">Next &gt;</a>
+
+
+<?= $this->ajaxLink('End',
+                    $this->url(array('page' => $this->last)),
+                    array('id' => 'id',
+                           'complete' => 'displayBooks(data)',
+                            'method' => 'post'),
+                    array('format' => 'json')); ?>
+
+
+Showing <div id="currentPage" style="display: inline;"><?php echo $this->current; ?></div> out of <?php echo $this->pageCount; ?>

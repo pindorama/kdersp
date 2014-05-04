@@ -5,16 +5,7 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
    private $_acl = null;
-  /* 
-   protected function _initAppAutoload()
-    {
-        $autoloader = new Zend_Application_Module_Autoloader(array(
-            'namespace' => 'App',
-            'basePath' => dirname(__FILE__),
-        ));
 
-        return $autoloader;
-    }*/
     
 
     protected function _initLogger()
@@ -59,45 +50,52 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         
           return $modelLoader;
     }
-    
-    
-       protected function _initLayoutChanger()
+
+   /* protected function _initViewHelpers()
 {
-    $this->bootstrap('frontController');
-    $this->getResource('frontController')
-         ->registerPlugin(new Plugin_Layout_Changer());
-}
-     protected function _initFrontControllerPlugins()
+    $view->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    $view->jQuery()->addStylesheet('js/jquery/css/redmond/jquery-ui-1.10.4.custom.css')
+        ->setLocalPath('/js/jquery/js/jquery-1.10.2.js')
+        ->setUiLocalPath('/js/jquery/js/jquery-1.10.4.custom.min.js');
+}*/
+    
+    protected function _initJqueryLoad()
     {
-        $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin(new My_plugins_ViewSetup());
+
+        /*$view = new Zend_View();
+     // $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
+//$view->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+
+
+    
+    
+    
+     $view->jQuery()->setLocalPath('/js/jquery/js/jquery-1.10.2.js')
+                            ->setUiLocalPath('/js/jquery/js/jquery-1.10.4.custom.min.js')
+                            ->addStylesheet('/js/jquery/css/redmond/jquery-ui-1.10.4.custom.css');
+                    
+    js
+    ZendX_JQuery::enableView($view);*/
     }
-   
     
-    
-    
-    protected function _initPartial() {
-            //initialize the new ressource
-        $this->bootstrap('layout');
-        //get the object layout
-        $layout = $this->getResource('layout');
-        //get the layout View
-        $view = $layout->getView();
-             
-         //    $view->whatever = $_form;
-    }
+
     /*--------------------ViewHelper----------------------------------------------
      *the layout come not by default zend framework, we have to make manuelly ,
      * so we have to say to application.in where the layout is.
      */
-    function _initViewHelpers (){
+  
     
-              $this->bootstrap('layout');
-        //get the object layout
-        $layout = $this->getResource('layout');   
-            $view = $layout->getView();
+    function _initViewHelpers (){
+        //resoucer layout, you have in aplication ini declared
+        $this->bootstrap('layout');
+        //get the resoucer layout(object) from the path in aplication.ini
+        $layout = $this->getResource('layout');  
+        //the layout is like Zend_View work fast the same
+          $view = $layout->getView();
              
-             
+             {
+
+}
              
              /*
               * all os those view helpers are available and come from the view instance ($view
@@ -108,7 +106,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
               */
         $view->headTitle()->setSeparator(' - ');
         $view ->headTitle('Controle de Academia');
-        $view->setHelperPath(  APPLICATION_PATH.'/helpers', '');
+        
+        //it is goin to look for any helpers specifique in modules, but if the viewhelper is not there
+        //is going to look inside of this path
+        $view->setHelperPath(APPLICATION_PATH.'/helpers', '');
+        
+          $view->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+        // $view->jQuery()->addStylesheet('js/jquery/css/redmond/jquery-ui-1.10.4.custom.css');
+        // $view->jQuery()->setLocalPath('/js/jquery/js/jquery-1.10.2.js');
+       // $view->jQuery()->setUiLocalPath('/js/jquery/js/jquery-1.10.4.custom.min.js');
+        //ZendX_JQuery::enableView($view);
+        
+      
+
+        //i can use dojo ViewHelps in my view and layoutscripts
+    //   Zend_Dojo::enableView($view);
+        ;
         
         //come from Zend from xml to array format, nav = container
         /**
@@ -125,10 +138,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 
        
                 
-    }
+    } 
     
     
+protected function _initView()
+{
+    //getBaseUrl
+    $this->bootstrap('frontcontroller');
+    $controller = Zend_Controller_Front::getInstance();
+    $baseurl =  $controller->getBaseUrl();
     
+    $view = new Zend_View();
+  
+   // $view->baseUrl = Zend_Registry::get('config')->root_path;
 
+    $view->addHelperPath("ZendX/JQuery/View/Helper", "ZendX_JQuery_View_Helper");
+    $view->jQuery()->addStylesheet($baseurl . 'js/Jquery/css/redmond/jquery-ui-1.10.4.custom.css');
+    $view->jQuery()->setLocalPath($baseurl . 'js/Jquery/js/jquery-1.10.2.js');
+    $view->jQuery()->setUiLocalPath($baseurl . 'js/Jquery/js/jquery-ui-1.10.4.custom.min.js');
+    $view->jQuery()->enable();
+    $view->jQuery()->uiEnable();
+    $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+    $viewRenderer->setView($view);
+    Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+
+    return $view;
 }
 
+}

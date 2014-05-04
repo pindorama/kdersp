@@ -1,4 +1,28 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Books</b> and script/action name <b>list</b></p>
-</div>
+
+
+     <!--Pick your Date: --> <?php //echo $this->datePicker("dp1", '', array('defaultDate' => date('Y/m/d', time()))); ?>
+     <?php $this->jQuery()->enable()
+                           ->addJavascriptFile($this->baseUrl().'/js/frontend.js');
+      ?>
+     
+     <div id="booksResponse">
+    <?php
+    
+  foreach($this->books as $book) {
+      echo $this->accordionPane('books',
+                                'written by '. $book['author'],
+                                 array('title' => $book['title']));
+      }
+      echo $this->accordionContainer('books',
+                                       array('active' => 'none', 'collapsible' => 'true'));
+  ?>
+     </div>  
+    <!--partial view-->
+   <?php echo $this->paginationControl($this->paginator,'Sliding', 'pagination.phtml'); ?>
+    
+   
+  <?= $this->ajaxLink('test', 
+                    $this->url(array('page' => '2')),
+                    array('id' => 'test', 'complete' => 'displayBooks(data);', 'method' => 'post'),
+                    array('format' => 'json'));
+    ?>   

@@ -3,13 +3,13 @@ class Model_LibraryAcl extends Zend_Acl{
     public function __construct() {
         
         /*
-         * Roles (User,Admins with inherig(heranca)
+         * Roles
          */
         $this->addRole(new Zend_Acl_Role('guests'));
         $this->addRole(new Zend_Acl_Role('users'), 'guests');
         $this->addRole(new Zend_Acl_Role('admins'), 'users');
         /*
-         * Resources (Controllers and Action) with inheritg(heranca)
+         * Resources
          */
         //create a top level resource for libray(module)
         $this->add(new Zend_Acl_Resource('library'))
@@ -36,11 +36,8 @@ class Model_LibraryAcl extends Zend_Acl{
          // $this->allow('guests','default:error','error');
           //you dont users login twice
           
-          //$this->deny('guests','default:authentication','login');
+          $this->allow('guests','default:authentication','login');
           $this->allow('guests','default:error','error');
-          $this->allow('guests','default:index','index');
-          $this->allow('guests','default:index','products');
-         
           
            $this->deny('users','default:authentication','login');
            $this->allow('users','default:index','index');
@@ -49,6 +46,6 @@ class Model_LibraryAcl extends Zend_Acl{
            $this->allow('users', 'library:books', array('index', 'list'));
            
            $this->allow('admins','admin:book', array('index','add','edit','delete'));
-        
-    }
 }
+
+    }

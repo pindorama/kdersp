@@ -4,6 +4,8 @@ class Default_AuthenticationController extends Zend_Controller_Action {
 
     public function init() {
         $this->_helper->layout()->setLayout('layout');
+        $layout = Zend_Layout::getMvcInstance();
+        
 
        
     }
@@ -74,8 +76,9 @@ class Default_AuthenticationController extends Zend_Controller_Action {
         }
 
 
-        //$this->view->form = $form;
-        $this->view->placeholder('header')->append($form); 
+        $this->view->form = $form;
+       $this->_helper->layout()->varname = $form;
+       //$this->view->placeholder('header')->append($form); 
        
         //$this ->layout->login_form = $form;
         // $layout->assign('login_form', $form);

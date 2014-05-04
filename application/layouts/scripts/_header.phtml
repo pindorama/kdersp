@@ -1,33 +1,49 @@
 <?php echo $this->doctype() ?>
-<?php //echo $this->placeholder('header'); ?>
+<?php //echo $this->placeholder('header');  ?>
 
 <html>
     <head>
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Favicon -->
-    
+
         <link rel="shortcut icon" href="/img/favicon.ico">
         <?php echo $this->headMeta() ?>
         <?php echo $this->headTitle() ?>
-
-        <?php $this->headScript()->appendFile($this->baseUrl().'/js/jquery.js') ?>
-        <?php $this->headScript()->appendFile($this->baseUrl().'/js/bootstrap.js') ?>
-        <?php $this->headScript()->appendFile($this->baseUrl().'/js/jquery-ui.js') ?>
-        <?php $this->headScript()->appendFile($this->baseUrl().'/js/jquery-ui-1.10.2.custom.js') ?>
-        <?php $this->headScript()->appendFile($this->baseUrl().'/js/jquery.maskedinput.js') ?>
-        <?php $this->headScript()->appendFile($this->baseUrl().'/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9')) ?>
+        <?php 
         
+                /*
+
+        if($this->jQuery()->isEnabled()){
+            $this->jQuery()->setLocalPath($this->baseUrl().'/js/jquery/js/jquery-1.10.2.js')
+                            ->setUiLocalPath($this->baseUrl().'/js/jquery/js/jquery-1.10.4.custom.min.js')
+                            ->addStylesheet($this->baseUrl().'/js/jquery/css/redmond/jquery-ui-1.10.4.custom.css');
+                    echo $this->jQuery();'    
+        }*/
+       // echo $this->headScript()->prependFile($this->baseUrl().'/js/frontend.js', 'text/javascript');
+        echo  $this->jQuery(); 
+        
+    
+     
+        ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/jquery.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/jquery-2.1.0.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/bootstrap.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/jquery-ui.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/jquery-ui-1.10.2.custom.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/jquery.maskedinput.js') ?>
+        <?php $this->headScript()->appendFile($this->baseUrl() . '/js/html5shiv.js', 'text/javascript', array('conditional' => 'lt IE 9')) ?>
+
         <?php echo $this->headScript() ?>
 
-        <?php $this->headLink()->appendStylesheet($this->baseUrl().'/css/jquery-ui.css', 'screen') ?>
-        <?php $this->headLink()->appendStylesheet($this->baseUrl().'/css/bootstrap.css', 'screen') ?>
-        <?php $this->headLink()->appendStylesheet($this->baseUrl().'/css/font-awesome.css', 'screen') ?>
-        <?php $this->headLink()->appendStylesheet($this->baseUrl().'/css/font-awesome-ie7.min.css', 'screen', 'IE 7') ?>
-        <?php $this->headLink()->appendStylesheet($this->baseUrl().'/css/global.css', 'screen') ?>
-        <?php $this->headLink()->appendStylesheet($this->baseUrl().'/css/bootstrap-responsive.css', 'screen') ?>
-        
-        <?php echo $this->headLink() ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/jquery-ui.css', 'screen') ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap.css', 'screen') ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome.css', 'screen') ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/font-awesome-ie7.min.css', 'screen', 'IE 7') ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/global.css', 'screen') ?>
+        <?php $this->headLink()->appendStylesheet($this->baseUrl() . '/css/bootstrap-responsive.css', 'screen') ?>
+
+<?php echo $this->headLink() ?>
     </head>
     <body>
         <!-- Modal -->
@@ -64,6 +80,7 @@
                                 <ul class="nav">
                                     <!-- viewHelper url  one of the best veiew helpers-->
                                     <li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), null, true) ?>"><i class="icon-home"></i> Início</a></li>
+                                    <li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'login'), null, true) ?>"><i class="icon-logout"></i> login</a></li>
                                     <li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'authentication', 'action' => 'logout'), null, true) ?>"><i class="icon-logout"></i> Logout</a></li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-pencil"></i> Cadastro <b class="caret"></b></a>
@@ -79,8 +96,8 @@
                                             <li><a href="<?php echo $this->url(array('controller' => 'customer', 'action' => 'index'), null, true) ?>">Controle de Alunos</a></li>
                                             <li><a href="<?php echo $this->url(array('controller' => 'employees', 'action' => 'index'), null, true) ?>">Controle de Funcionários</a></li>
                                             <li><a href="#">Controle de Acesso</a></li>
-                                             <li><a href="#"></a></li>
-                                            
+                                            <li><a href="#"></a></li>
+
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -94,11 +111,11 @@
                                 <ul class="nav pull-right">
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> Entrar <b class="caret"></b></a>
-                                        <form class="login-menu dropdown-menu well">
-                                            <?php// echo $this->partial('partials/login.phtml', array('users' => $this->header)); ?>
-                                            <?php echo $this->form; ?>
-                                         
-                                        </form>
+                                            <div class="login-menu dropdown-menu well">
+                                             <?php echo  $this->layout()->varname; ?>
+                                           
+
+                                            </div>
                                     </li>
                                 </ul>
                             </div><!--/.nav-collapse -->

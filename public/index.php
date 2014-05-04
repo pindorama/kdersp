@@ -1,6 +1,14 @@
 
 <?php
 
+define('BASE_PATH', realpath(dirname(__FILE__) . '/../'));
+define('APPLICATION_PATH', BASE_PATH . '/application');
+
+// Include path
+set_include_path(
+    BASE_PATH . '/library'
+);
+
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
@@ -9,10 +17,11 @@ defined('APPLICATION_PATH')
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
+
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),
-    get_include_path(),
+    //get_include_path(),
 )));
 
 
