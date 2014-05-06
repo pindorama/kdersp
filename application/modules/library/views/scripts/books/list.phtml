@@ -3,15 +3,33 @@
      <!--Pick your Date: --> <?php //echo $this->datePicker("dp1", '', array('defaultDate' => date('Y/m/d', time()))); ?>
      <?php $this->jQuery()->enable()
                            ->addJavascriptFile($this->baseUrl().'/js/frontend.js');
+    // echo 'Book:';
+     
+     /**
+      * translate ViewHelper, i have to setup the translater helper,
+      *  you can do through a controller pllugin,you setup in the module bootstrap or to setup in the
+      * appBootstrap, i will setup it only for a module library, but it almost the for the controller plugin
+      */
+  
+   // echo $this->translate->_('livros ');
+    //
+     //echo $this->translate->_('Books').':';
       ?>
      
      <div id="booksResponse">
     <?php
     
   foreach($this->books as $book) {
+      $details = 'written by '.$book->getAuthor().
+                 '<br />Comments:<dl>';
+      foreach($book->getComments($this->url(array('controller' => 'comment', 'action' => 'edit'))) as $comment){
+          $details .= '<dt>'.$comment['username'].'</dt>'.
+                      '<dd>'.$comment['comment'].'</dd>';
+      }
+      $details .= '</dl>';
       echo $this->accordionPane('books',
-                                'written by '. $book['author'],
-                                 array('title' => $book['title']));
+                                $details,
+                                 array('title' => $book->getTitle()));
       }
       echo $this->accordionContainer('books',
                                        array('active' => 'none', 'collapsible' => 'true'));

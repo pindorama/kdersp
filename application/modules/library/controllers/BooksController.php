@@ -28,29 +28,18 @@ class Library_BooksController extends Zend_Controller_Action
 
      public function listAction()
     {
-        // action body
+        // create a object from ListBooks
         $bookList= new Library_Model_ListBooks();
-        $bookListe = $bookList->listBooks();
-        
-        $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($bookListe));
-        //how many pages 
-        $paginator->setItemCountPerPage(3)
-                //Show the page number
-                    ->setCurrentPageNumber($this->_getParam('page', 1))
-                    ->setPageRange(3);    
-        
-        $books = array();
-        foreach($paginator as $book){
-            $books[] = $book;
-        }
-        
+        //bekome a array of books
+        $books = $bookList->listBooks($this->_getParam('page', 1));
+      
         $this->view->books = $books;
-        
         //apply the paginator to our view
         if(!$this->_request->isXmlHttpRequest()){
-            $this->view->paginator = $paginator;
+            //problem with getPaginator
+            $this->view->paginator = $bookList->getPaginator();
         } else {
-            $this->view->currentPage = $paginator->getCurrentPageNumber();
+            $this->view->currentPage = $bookList->getPaginator()->getCurrentPageNumber();
         }
     }
 
